@@ -68,6 +68,7 @@ class TimeSlot extends Component {
                                         auth={this.props.auth}
                                         speaker={item.Presenter}
                                         track={item.Topic}
+                                        item={item}
                                     />)
                                 }
 

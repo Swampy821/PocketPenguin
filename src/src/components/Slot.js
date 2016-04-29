@@ -8,6 +8,7 @@ import PersonIcon from "material-ui/svg-icons/social/person";
 
 import RSVPButton from "./RSVPButton";
 import { browserHistory } from "react-router";
+import moment from 'moment';
 
 const iconStyle = {
     height: "15px"
@@ -49,10 +50,29 @@ class Slot extends Component {
         return "";
     }
 
+    getDT() {
+        const day = this.props.item.Day;
+        const eDay = this.props.item.EndDay;
+        const time = this.props.item.Time;
+        const eTime = this.props.item.EndTime
+        const startTime = parseInt(moment(`${day} ${time}`).format("x"));
+        const endTime = parseInt(moment(`${eDay} ${eTime}`).format("x"));
+        const ndate = new Date();
+        const now = parseInt(moment(ndate).format("x"));
+        if (
+            now > startTime && 
+            now < endTime
+        ) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div className="slot" onClick={this.onClick.bind(this)}> 
+                <div className="slot" onClick={this.onClick.bind(this)} style={{backgroundColor: this.getDT() ? "#fbffcc" : "#fff"}}> 
                     <div className="slot-title">
                         {this.props.title}
                     </div>
