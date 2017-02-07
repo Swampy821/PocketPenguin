@@ -1,0 +1,38 @@
+.programList {
+    background-color: white;
+    height: 100%;
+    display: inline-block;
+    color: black;
+}
+
+.timeslot {
+    width: 100%;
+    display: block;
+    float: left;
+    background-color: #dee1e5;
+}
+
+.timeslot > .time {
+    padding: 5px;
+    color: #444444;
+}
+
+
+.slot {
+    display: block;
+    float: left;
+    border-bottom: 1px solid #cccccc;
+}
+
+.slot-title {
+    font-weight: bold;
+    padding-left: 9px;
+    display: block;
+    padding-bottom: 4px;
+    padding-top: 7px;
+}
+
+.rsvp-button {
+    float: right;
+    margin-top: -15px;
+}

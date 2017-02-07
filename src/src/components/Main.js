@@ -2,28 +2,26 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React from 'react';
-import HeaderBar from "./HeaderBar";
-import ProgramList from "./ProgramList";
+import { Router, Route, Link, browserHistory } from 'react-router'
+import Home from "./Home"
 
 class AppComponent extends React.Component {
   constructor() {
     super();
-    this.state = {
-      programList: false
-    }
+
   }
+
   render() {
     return (
-      <div className="index">
-          <HeaderBar {...this.props}/>
-          {this.state.programList && <ProgramList {...this.props} />} 
-      </div>
-    );
+      <Router history={browserHistory}>
+        <Route path="/" component={Home} />
+      </Router>
+    )
   }
+
+
+
 }
 
-AppComponent.defaultProps = {
-  programList: false
-};
 
 export default AppComponent;

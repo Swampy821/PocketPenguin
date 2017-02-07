@@ -9,6 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import TocIcon from 'material-ui/svg-icons/action/toc';
 import EventIcon from 'material-ui/svg-icons/action/event';
+import { browserHistory } from 'react-router';
 
 const style = {
     height: "15px"
@@ -22,7 +23,7 @@ class HeaderBar extends Component {
     }
 
     showProgramList() {
-        this.props.programList = true;
+        browserHistory.push("/");
         this.close();
     }
 

@@ -1,0 +1,18 @@
+
+.date {
+    display:inline-block;
+    width:100%;
+    color:black;
+}
+
+
+.date > .day {
+    font-size: 26px;
+    padding: 8px;
+    font-weight: 600;
+}
+
+.date > .dayNumber {
+    font-size: 27px;
+    padding-left: 10px;
+}
