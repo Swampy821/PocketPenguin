@@ -1,3 +1,5 @@
-data.json
-data
-js/script.min.js
+src/node_modules
+src/dist
+.vscode
+.DS_Store
+npm-debug.log
