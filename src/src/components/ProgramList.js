@@ -13,8 +13,6 @@ class ProgramList extends Component {
     render() {
         return (
             <div>
-                <div className="whiteBar"></div>
-                <LeftCalendar />
                 <List />
             </div>
         );

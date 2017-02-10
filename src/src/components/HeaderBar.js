@@ -10,6 +10,11 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import TocIcon from 'material-ui/svg-icons/action/toc';
 import EventIcon from 'material-ui/svg-icons/action/event';
 import { browserHistory } from 'react-router';
+import alt from "../alt";
+import FacebookLogin from 'react-facebook-login';
+import AuthActions from "./../actions/AuthActions";
+import AuthStore from "./../stores/AuthStore";
+
 
 const style = {
     height: "15px"
@@ -19,9 +24,16 @@ class HeaderBar extends Component {
     constructor() {
         super();
         injectTapEventPlugin();
-        this.state = {open: false};
+        this.state = {
+            open: false
+        };
     }
-
+    componentDidMount() {
+        AuthStore.listen((auth) => {
+            this.setState(auth.auth);
+        });
+        this.setState(AuthStore.getState().auth);
+    }
     showProgramList() {
         browserHistory.push("/");
         this.close();
@@ -38,12 +50,55 @@ class HeaderBar extends Component {
             open: false
         });
     }
+
+
+    getTitle() {
+        return "Pocket Penguin";
+    }
+
+    responseFacebook(auth) {
+        AuthActions.auth(auth);
+    }
+
+
+    getFacebookButton() {
+        if(!this.state.ID) {
+            return <FacebookLogin
+            appId="433048977029860"
+            autoLoad={false}
+            fields="name,email,picture"
+            scope="public_profile,email"
+            callback={this.responseFacebook.bind(this)}
+            />;
+        } else {
+            return <MenuItem
+                primaryText="Logout"
+                onClick={this.logout.bind(this)}
+            />;
+        }
+    }
+    getMyCalendar() {
+        if(this.state.ID) {
+            return <MenuItem 
+                primaryText="Your Calendar" 
+                leftIcon={<EventIcon />}
+            />;
+        }
+    }
+    logout() {
+        this.state = {
+            open: false
+        };
+        AuthActions.logout();
+    }
+
+
     render() {
         return (
             <div>
             <MuiThemeProvider muiTheme={muiTheme}>
                 <AppBar 
-                    title="Penguicon Schedule"
+                    title={this.getTitle()}
                     onLeftIconButtonTouchTap={this.go.bind(this)}
                     />
             </MuiThemeProvider>
@@ -59,10 +114,8 @@ class HeaderBar extends Component {
                         leftIcon={<TocIcon />}
                         onClick={this.showProgramList.bind(this)}
                     />
-                    <MenuItem 
-                        primaryText="Your Calendar" 
-                        leftIcon={<EventIcon />}
-                    />
+                    {this.getMyCalendar()}
+                    {this.getFacebookButton()}
                 </Drawer>
             </MuiThemeProvider>
             </div>

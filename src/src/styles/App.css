@@ -1,7 +1,7 @@
 /* Base Application Styles */
 body {
-  color: #fff;
-  background: #222;
+  color: black;
+  background: white;
   padding-top:100px;
 }
 
@@ -18,12 +18,12 @@ body {
   text-align: center;
   border: 1px solid #000;
   border-width: 1px 0;
-  background: #666;
+  background: white;
 }
 
 
 
-.sticky {
+.stickier {
   position: fixed;
   top: 0px;
   width: 100%;
@@ -39,4 +39,8 @@ body {
   left: 0;
   width: 50px;
   z-index: -5000;
+}
+
+.kep-login-facebook {
+  width: 100%;
 }

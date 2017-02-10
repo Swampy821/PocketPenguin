@@ -1,7 +1,7 @@
 .programList {
     background-color: white;
     height: 100%;
-    display: inline-block;
+    display: block;
     color: black;
 }
 
@@ -20,8 +20,10 @@
 
 .slot {
     display: block;
-    float: left;
     border-bottom: 1px solid #cccccc;
+    width:100%;
+    background-color:white;
+    padding: 1px;
 }
 
 .slot-title {
@@ -30,6 +32,7 @@
     display: block;
     padding-bottom: 4px;
     padding-top: 7px;
+    padding-right: 30px;
 }
 
 .rsvp-button {

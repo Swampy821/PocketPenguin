@@ -3,3 +3,4 @@ src/dist
 .vscode
 .DS_Store
 npm-debug.log
+mount

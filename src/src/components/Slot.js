@@ -13,22 +13,20 @@ const iconStyle = {
 class Slot extends Component {
     constructor(props) {
         super(props);
-        this.style = {
-            width: ""
-        };
     }
-    componentWillMount(){
-        this.style.width = (screen.width-50) + "px";
-    }
+
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div className="slot">
+                <div className="slot"> 
                     <div className="slot-title">
                         {this.props.title}
                     </div>
-                    <div className="slot-description" style={this.style}>
+                    
+                    <div className="slot-description">
                         <RoomIcon style={iconStyle}/> {this.props.location}
+                        
+
                         <div className="rsvp-button">
                             <RSVPButton rsvp={this.props.rsvp}/>
                         </div>

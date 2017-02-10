@@ -1,0 +1,1 @@
+wget https://raw.githubusercontent.com/waldo323/schedcsv/master/penguicon.schedule.xml -O data.xml

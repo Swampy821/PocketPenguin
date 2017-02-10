@@ -11,7 +11,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <div className="sticky">
+                <div className="stickier">
                     <HeaderBar />  
                     <Search />
                 </div>
