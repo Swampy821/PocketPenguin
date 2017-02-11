@@ -31,7 +31,7 @@ class AuthStore {
 
     handleLogout() {
         this.auth = {};
-        localStorege.removeItem("auth");
+        localStorage.removeItem("auth");
     }
     handleAuth(auth) {
         this.auth = auth;
