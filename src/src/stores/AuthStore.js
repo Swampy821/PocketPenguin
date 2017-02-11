@@ -35,23 +35,21 @@ class AuthStore {
     }
     handleAuth(auth) {
         this.auth = auth;
+        this.auth.SavedScheduleObj = {};
+        this.auth.SavedSchedule.forEach((val) => {
+            this.auth.SavedScheduleObj[val] = true;
+        })
         this._saveCache();
     }
 
-    updateRSVP(rsvp) {
+    updateRSVP(rsvpObj) {
         let list = this.auth.SavedSchedule;
-        let filtered = false;
-        list = list.filter((val) => {
-            if(val === rsvp) {
-                filtered = true;
-                return false;
-            }
-            return true;
-        });
-        if(!filtered) {
-            list.push(rsvp);
+        if(rsvpObj.add) {
+            this.auth.SavedScheduleObj[rsvpObj.rsvp] = true;
+        } else {
+            delete this.auth.SavedScheduleObj[rsvpObj.rsvp];
         }
-        this.auth.SavedSchedule = list;
+        this.auth.SavedSchedule = Object.keys(this.auth.SavedScheduleObj);
         this._saveCache();
     }
 

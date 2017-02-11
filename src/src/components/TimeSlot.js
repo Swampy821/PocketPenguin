@@ -16,6 +16,9 @@ const customStyleObject = {
 class TimeSlot extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            show: true
+        };
     }
 
     formatTime(time) {
@@ -25,25 +28,39 @@ class TimeSlot extends Component {
     componentWillMount(){
 
     }
-    render() {
-        
-        return (
-                <div>
-                    <sticky  stickyStyle={customStyleObject} topOffset={-170}>
-                        <div className="timeslot">
-                            <div className="time">
-                                {this.formatTime(this.props.time)}
-                            </div>
-                        </div>
-                    </sticky>
-                    {
-                        this.props.slots.map((item, index) => {
-                            return (<Slot key={index} rsvp={true} id={item.id} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)}/>)
 
-                        })
-                    }
-                </div>
-        );
+    show() {
+        const showing = this.props.slots.filter((item) => {
+            return item.show;
+        });
+        return showing.length > 0;
+    }
+
+
+    render() {
+        if(this.show()) {
+            return (
+                    <div>
+                        <sticky  stickyStyle={customStyleObject} topOffset={-170}>
+                            <div className="timeslot">
+                                <div className="time">
+                                    {this.formatTime(this.props.time)}
+                                </div>
+                            </div>
+                        </sticky>
+                        {
+                            this.props.slots.map((item, index) => {
+                                if(item.show) {
+                                    return (<Slot key={index} rsvp={true} id={item.id} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)}/>)
+                                }
+
+                            })
+                        }
+                    </div>
+            );
+        } else {
+            return <span />
+        }
     }
 }
 

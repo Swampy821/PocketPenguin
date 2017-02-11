@@ -5,6 +5,7 @@ import muiTheme from "./../styles/style";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import SearchIcon from "material-ui/svg-icons/action/search";
+import ScheduleActions from "./../actions/ScheduleActions";
 
 const style = {
     textAlign: "center",
@@ -25,6 +26,9 @@ class Search extends Component {
     constructor(props) {
         super(props);
     }
+    onChange(e, val) {
+        ScheduleActions.search(val);
+    }
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
@@ -32,6 +36,7 @@ class Search extends Component {
                     <SearchIcon style={searchStyle}/>
                     <TextField style={textStyle}
                         hintText="Enter Program Name"
+                        onChange={this.onChange.bind(this)}
                     />
                 </Paper>
             </MuiThemeProvider>

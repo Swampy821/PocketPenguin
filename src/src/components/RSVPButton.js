@@ -42,12 +42,11 @@ class RSVPButton extends Component {
 
     getRSVPStatus() {
         const id = this.props.id;
-        return this.state.auth.SavedSchedule.filter((val) => {
-            if(val === id) {
-                return true;
-            }
+        if(this.state.auth.SavedScheduleObj) {
+            return this.state.auth.SavedScheduleObj[id];
+        }else{
             return false;
-        }).length > 0;
+        }
     }
 
     setAuthStatus(auth) {
@@ -57,7 +56,7 @@ class RSVPButton extends Component {
     }
 
     onClick() {
-        AuthActions.updateRSVP(this.props.id, this.state.auth.JWT);
+        AuthActions.updateRSVP(this.props.id, this.state.auth.JWT, !this.getRSVPStatus());
     }
     render() {
         if(!this.getRSVPStatus()) {

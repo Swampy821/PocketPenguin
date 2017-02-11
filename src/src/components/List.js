@@ -23,33 +23,13 @@ class List extends Component {
     }
     componentWillMount(){
         // this.style.width = (screen.width-50) + "px";
-        ScheduleStore.listen((days) => {
-            this.buildIntoTimeslots(days.days.Days)
+        ScheduleStore.listen((state) => {
+            // this.buildIntoTimeslots(state.days.Days)
+            this.setState({days: state.days})
         });
         let auth = AuthStore.getState().auth;
         ScheduleActions.getScheduleByDay(auth);
     }
-
-    buildIntoTimeslots(days) {
-        days.forEach((day) => {
-            let timeSlots = {};
-            day.Slots.forEach((val) => {
-                if( !timeSlots[val.Time] ) { timeSlots[val.Time] = []; }
-                timeSlots[val.Time].push(val);
-            })
-            day.Slots = timeSlots
-        });
-
-        days.sort(function(a,b){
-            return new Date(a.Day) - new Date(b.Day);
-        });
-
-        this.setState({
-            days: days
-        });
-        
-    }
-
     getDay(dayNumber) {
         switch(dayNumber) {
             case 0: 
@@ -68,7 +48,17 @@ class List extends Component {
                 return "Sat";
         }
     }
-
+    anyShowingInDay(day) {
+        let show = false;
+        Object.keys(day.Slots).forEach((index) => {
+            day.Slots[index].forEach((item) => {
+                if(item.show) {
+                    show = true;
+                }
+            });
+        });
+        return show;
+    }
     render() {
         const customStyleObject = {
             top: "90px",
@@ -76,7 +66,7 @@ class List extends Component {
             width: "100%",
             padding: "7px",
             backgroundColor: "white",
-            zIndex: 0,
+            zIndex: 2,
             borderBottom: "1px solid #ccc"
         };
         return (
@@ -85,25 +75,26 @@ class List extends Component {
                     <StickyContainer>
                         
                     { this.state.days.map((day) => {
+                        if(this.anyShowingInDay(day)) {
+                            let fday = new Date(day.Day);
+                            let dayString = this.getDay(fday.getDay());
+                            let dayNumber = fday.getDate();
+                            if( dayNumber < 10) { dayNumber = "0" + dayNumber; }   
 
-                        let fday = new Date(day.Day);
-                        let dayString = this.getDay(fday.getDay());
-                        let dayNumber = fday.getDate();
-                        if( dayNumber < 10) { dayNumber = "0" + dayNumber; }   
+                            return (
+                                <div>
+                                    <Sticky stickyStyle={customStyleObject} topOffset={-150}>
+                                        <h2><b>{dayString}</b> {dayNumber}</h2>
+                                    </Sticky>
+                                    <StickyContainer>
 
-                        return (
-                            <div>
-                                <Sticky stickyStyle={customStyleObject} topOffset={-150}>
-                                    <h2><b>{dayString}</b> {dayNumber}</h2>
-                                </Sticky>
-                                <StickyContainer>
-
-                                {Object.keys(day.Slots).map((key) => {
-                                    return <TimeSlot time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id}/>
-                                })}
-                                </StickyContainer>
-                            </div>
-                        )
+                                    {Object.keys(day.Slots).map((key) => {
+                                        return <TimeSlot time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id}/>
+                                    })}
+                                    </StickyContainer>
+                                </div>
+                            )
+                        }
                     }) }
                     </StickyContainer>
                     

@@ -27,6 +27,11 @@ class ScheduleActions {
     }
 
 
+    search(val) {
+        this.dispatch(val);
+    }
+
+
 
 }
 

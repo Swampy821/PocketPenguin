@@ -27,14 +27,15 @@ class AuthActions {
     }
 
    
-    updateRSVP(rsvp, jwt) {
+    updateRSVP(rsvp, jwt, add) {
+        this.dispatch({rsvp, add});
         api.post({
             url: "/rsvp",
             jwt,
             data: rsvp
         })
         .then((data) => {
-            this.dispatch(rsvp);
+            this.dispatch({rsvp, add});
         });
     }
 

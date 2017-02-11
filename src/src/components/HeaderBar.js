@@ -58,6 +58,9 @@ class HeaderBar extends Component {
 
     responseFacebook(auth) {
         AuthActions.auth(auth);
+        this.setState({
+            open: false
+        });
     }
 
 
