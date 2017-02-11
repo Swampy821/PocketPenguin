@@ -38,7 +38,7 @@ class TimeSlot extends Component {
                     </sticky>
                     {
                         this.props.slots.map((item, index) => {
-                            return (<Slot key={index} rsvp={true} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)}/>)
+                            return (<Slot key={index} rsvp={true} id={item.id} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)}/>)
 
                         })
                     }

@@ -13,8 +13,11 @@ const iconStyle = {
 class Slot extends Component {
     constructor(props) {
         super(props);
+        this.state = {}
     }
+    componentWillMount(){
 
+    }
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
@@ -28,7 +31,7 @@ class Slot extends Component {
                         
 
                         <div className="rsvp-button">
-                            <RSVPButton rsvp={this.props.rsvp}/>
+                            <RSVPButton id={this.props.id}/>
                         </div>
                     </div>
 

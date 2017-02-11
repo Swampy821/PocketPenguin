@@ -7,6 +7,7 @@ import FlatButton from "material-ui/FlatButton";
 import StarIconEmpty from "material-ui/svg-icons/toggle/star-border";
 import StarIcon from "material-ui/svg-icons/toggle/star";
 import AuthStore from "./../stores/AuthStore";
+import AuthActions from "./../actions/AuthActions";
 
 const iconStyle = {
     height: "15px"
@@ -26,27 +27,40 @@ class RSVPButton extends Component {
     }
     componentWillMount(){
         const firstAuth = AuthStore.getState();
-        this.setAuthStatus(firstAuth.auth.ID);
+        this.setAuthStatus(firstAuth.auth);
+        this.setState({
+            auth: firstAuth.auth
+        });
         AuthStore.listen(() => {
             const auth = AuthStore.getState()
-            this.setAuthStatus(auth.auth.ID);
+            this.setAuthStatus(auth.auth);
+            this.setState({
+                auth: auth.auth
+            });
         });
     }
 
-    setAuthStatus(show) {
+    getRSVPStatus() {
+        const id = this.props.id;
+        return this.state.auth.SavedSchedule.filter((val) => {
+            if(val === id) {
+                return true;
+            }
+            return false;
+        }).length > 0;
+    }
+
+    setAuthStatus(auth) {
         this.setState({
-            show: show ? true : false
+            show: auth.ID ? true : false
         });
     }
 
     onClick() {
-        this.setState({
-            rsvp: !this.state.rsvp
-        });
+        AuthActions.updateRSVP(this.props.id, this.state.auth.JWT);
     }
     render() {
-
-        if(!this.state.rsvp) {
+        if(!this.getRSVPStatus()) {
             this.buttonStyle.color = "black";
         } else {
             this.buttonStyle.color = "blue";
@@ -58,7 +72,7 @@ class RSVPButton extends Component {
                         style={this.buttonStyle}
                         onClick={this.onClick.bind(this)}
                         label="RSVP"
-                        icon={this.state.rsvp ? <StarIcon /> : <StarIconEmpty  />}
+                        icon={this.getRSVPStatus() ? <StarIcon /> : <StarIconEmpty  />}
                         />
                 </MuiThemeProvider>
             );

@@ -1,18 +1,28 @@
 package api
 
 import (
+	"io/ioutil"
 	"net/http"
 
 	"github.com/martini-contrib/render"
 	"github.com/swampy821/pcon-schedule/server/libs/access"
+	"github.com/swampy821/pcon-schedule/server/libs/stores"
 	"github.com/swampy821/pcon-schedule/server/types"
 )
 
 func handleRSVP(r *http.Request, rend render.Render, auth types.AuthTypeNoAccess) {
-	type success struct {
-		Success bool
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
 	}
-	rend.JSON(200, success{Success: true})
+	data := string(body)
+
+	ret, err := stores.UpdateRSVP(data, auth)
+	if err != nil {
+		rend.Error(500)
+		return
+	}
+	rend.JSON(200, ret)
 }
 
 func RSVP(w http.ResponseWriter, r *http.Request, rend render.Render) {

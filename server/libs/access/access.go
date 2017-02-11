@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -98,6 +99,7 @@ func Valid(r *http.Request) (types.AuthTypeNoAccess, bool) {
 	token := authHeaderParts[1]
 	auth, err := DecodeJWTToken(token)
 	if err != nil {
+		log.Print(err)
 		return types.AuthTypeNoAccess{}, false
 	}
 	return auth, true

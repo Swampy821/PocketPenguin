@@ -4,6 +4,8 @@ import alt from "../alt";
 import api from "../api";
 
 class AuthActions {
+
+
     auth(auth) {
         this.dispatch();
 
@@ -23,6 +25,19 @@ class AuthActions {
     authUpdate(auth) {
         this.dispatch(auth);
     }
+
+   
+    updateRSVP(rsvp, jwt) {
+        api.post({
+            url: "/rsvp",
+            jwt,
+            data: rsvp
+        })
+        .then((data) => {
+            this.dispatch(rsvp);
+        });
+    }
+
 }
 
 module.exports = alt.createActions(AuthActions);

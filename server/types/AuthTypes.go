@@ -25,8 +25,9 @@ type pictureNA struct {
 }
 
 type AuthTypeNoAccess struct {
-	Email   string
-	ID      string
-	Picture string
-	JWT     string
+	Email         string
+	ID            string
+	Picture       string
+	JWT           string
+	SavedSchedule []string `bson:"SavedSchedule"`
 }
