@@ -8,9 +8,6 @@ class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
         this.dispatch();
-
-
-
         api.get({
             url: "/schedule/day",
             jwt: auth.JWT,
@@ -21,6 +18,11 @@ class ScheduleActions {
         });
     }
 
+    getScheduleSlot(id) {
+        setTimeout(() => {
+            this.dispatch(id);
+        })
+    }
 
     scheduleUpdate(data) {
         this.dispatch(data);

@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import muiTheme from './../styles/style';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
@@ -23,7 +22,6 @@ const style = {
 class HeaderBar extends Component {
     constructor() {
         super();
-        injectTapEventPlugin();
         this.state = {
             open: false
         };

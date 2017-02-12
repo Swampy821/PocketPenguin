@@ -14,9 +14,24 @@ class ScheduleStore {
         }
         this.bindListeners({
             handleScheduleUpdate: ScheduleActions.SCHEDULE_UPDATE,
-            handleSearch: ScheduleActions.SEARCH
+            handleSearch: ScheduleActions.SEARCH,
+            handleGetSlot: ScheduleActions.GET_SCHEDULE_SLOT
+            
         });
     }
+
+    componentWillMount() {
+        let schedule = localStorage.getItem("scheduleState");
+        try{
+            schedule = JSON.stringify(schedule);
+            this.setState(schedule);
+        }catch(e){}
+    }
+    
+    componentDidUpdate() {
+        localStorage.setItem("scheduleState", JSON.stringify(this.state));
+    }
+
 
     buildIntoTimeslots(nDays) {
         nDays.forEach((day) => {
@@ -36,9 +51,35 @@ class ScheduleStore {
         return nDays;
     }
 
+    buildIntoFlat(nDays) {
+        let dayArray = [];
+        nDays.forEach((day) => {
+                Object.keys(day.Slots).forEach((index) => {
+                day.Slots[index].forEach((val) => {
+                    dayArray.push(val);
+                });
+            });
+        });
+        return dayArray;
+    }
+
+
+    handleGetSlot(id) {
+        const filtered = this.state.flat.filter((item) => {
+            if(item.id === id) {
+                return true;
+            }
+            return false;
+        });
+        if(filtered.length === 1) {
+            this.setState({[id]: filtered[0]});
+        }
+    }
+
     handleScheduleUpdate(schedule) {
         this.setState({
-            days: this.buildIntoTimeslots(schedule.Days)
+            days: this.buildIntoTimeslots(schedule.Days),
+            flat: this.buildIntoFlat(schedule.Days)
         });
     }
 

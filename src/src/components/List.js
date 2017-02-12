@@ -88,8 +88,8 @@ class List extends Component {
                                     </Sticky>
                                     <StickyContainer>
 
-                                    {Object.keys(day.Slots).map((key) => {
-                                        return <TimeSlot time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id}/>
+                                    {Object.keys(day.Slots).map((key, index) => {
+                                        return <TimeSlot key={key+index} time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id}/>
                                     })}
                                     </StickyContainer>
                                 </div>

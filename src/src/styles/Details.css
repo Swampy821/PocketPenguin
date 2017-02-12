@@ -1,0 +1,50 @@
+.slot-details {
+    margin-top: -56px;
+    margin-left: 14px;
+    padding-right: 8px;
+}
+
+.slot-details h3 {
+    font-size: x-large;
+    margin-bottom: 2px;
+}
+
+.slot-details hr {
+    width:100%;
+}
+.slot-details-time {
+    color: #999999;
+}
+.slot-details-time > svg {
+    height: 19px !important;
+    width: 19px !important;
+    margin-bottom: -3px;
+    margin-top: 8px;
+}
+
+.slot-details-room {
+    margin-left: -3px;
+    color: #999999;
+}
+
+.slot-details-rsvp {
+    display: block;
+    width: 100%;
+    height: 40px;
+}
+
+.slot-detials-rsvp button {
+    display:block;
+    width:100% !important; 
+}
+
+
+.description-head {
+    color: #999999;
+}
+
+.description-wrapper {
+    margin-left: 15px;
+    margin-right:10px;
+    margin-top:4px;
+}

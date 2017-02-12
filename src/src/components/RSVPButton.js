@@ -23,6 +23,10 @@ class RSVPButton extends Component {
         this.buttonStyle = {
             float: "left"
         };
+
+        if(this.props.style) {
+            this.buttonStyle = Object.assign(this.buttonStyle, this.props.style);
+        }
        
     }
     componentWillMount(){

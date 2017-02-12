@@ -11,10 +11,16 @@ const open = require('open');
  * @type {boolean}
  */
 let isInitialCompilation = true;
-
+config.devServer.proxy = {
+   "/api": "http://localhost:8081"
+};
+console.log(config);
 const compiler = webpack(config);
 
+
 new WebpackDevServer(compiler, config.devServer)
+
+
 .listen(config.port, 'localhost', (err) => {
   if (err) {
     console.log(err);

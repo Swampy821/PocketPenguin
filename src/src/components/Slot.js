@@ -4,6 +4,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../styles/style";
 import RoomIcon from "material-ui/svg-icons/action/room";
 import RSVPButton from "./RSVPButton";
+import { browserHistory } from "react-router";
 
 const iconStyle = {
     height: "15px"
@@ -16,12 +17,20 @@ class Slot extends Component {
         this.state = {}
     }
     componentWillMount(){
-
+        
     }
+
+    onClick(e) {
+        if(e.target.className.indexOf("slot") > -1) {
+            browserHistory.push(`/slot/${this.props.id}`);
+            
+        }
+    }
+
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div className="slot"> 
+                <div className="slot" onClick={this.onClick.bind(this)}> 
                     <div className="slot-title">
                         {this.props.title}
                     </div>
