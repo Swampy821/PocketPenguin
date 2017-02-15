@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/swampy821/pcon-schedule/server/types"
+	"github.com/swampy821/pocketpenguin/server/types"
 	"gopkg.in/mgo.v2/bson"
 )
 

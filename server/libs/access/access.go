@@ -12,7 +12,7 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/swampy821/pcon-schedule/server/types"
+	"github.com/swampy821/pocketpenguin/server/types"
 )
 
 var jwtSecret = os.Getenv("JWT_SECRET")

@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/go-martini/martini"
-	"github.com/swampy821/pcon-schedule/server/handlers/api"
+	"github.com/swampy821/pocketpenguin/server/handlers/api"
 )
 
 func AddRoutes(m *martini.ClassicMartini) {

@@ -6,9 +6,9 @@ import (
 	"net/http"
 
 	"github.com/martini-contrib/render"
-	"github.com/swampy821/pcon-schedule/server/libs/access"
-	"github.com/swampy821/pcon-schedule/server/libs/stores"
-	"github.com/swampy821/pcon-schedule/server/types"
+	"github.com/swampy821/pocketpenguin/server/libs/access"
+	"github.com/swampy821/pocketpenguin/server/libs/stores"
+	"github.com/swampy821/pocketpenguin/server/types"
 )
 
 func decodeRequest(r *http.Request) (types.AuthType, error) {

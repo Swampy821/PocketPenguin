@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/martini-contrib/render"
-	"github.com/swampy821/pcon-schedule/server/libs/stores"
+	"github.com/swampy821/pocketpenguin/server/libs/stores"
 )
 
 func Schedule(r *http.Request, rend render.Render) {

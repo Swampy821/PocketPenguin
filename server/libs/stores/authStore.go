@@ -3,8 +3,8 @@ package stores
 import (
 	"log"
 
-	"github.com/swampy821/pcon-schedule/server/libs/access"
-	"github.com/swampy821/pcon-schedule/server/types"
+	"github.com/swampy821/pocketpenguin/server/libs/access"
+	"github.com/swampy821/pocketpenguin/server/types"
 	"gopkg.in/mgo.v2/bson"
 )
 
