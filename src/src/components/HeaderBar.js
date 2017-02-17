@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import TocIcon from 'material-ui/svg-icons/action/toc';
 import EventIcon from 'material-ui/svg-icons/action/event';
+import PeopleIcon from 'material-ui/svg-icons/social/people';
 import { browserHistory } from 'react-router';
 import alt from "../alt";
 import FacebookLogin from 'react-facebook-login';
@@ -36,6 +37,14 @@ class HeaderBar extends Component {
         browserHistory.push("/");
         this.close();
     }
+
+
+    showParties() {
+        browserHistory.push("/parties");
+        this.close();
+    }
+
+
 
     go() {
        this.setState({
@@ -116,6 +125,11 @@ class HeaderBar extends Component {
                         onClick={this.showProgramList.bind(this)}
                     />
                     {this.getMyCalendar()}
+                    <MenuItem 
+                        primaryText="Room Parties"
+                        leftIcon={<PeopleIcon />}
+                        onClick={this.showParties.bind(this)}
+                    />
                     {this.getFacebookButton()}
                 </Drawer>
             </MuiThemeProvider>

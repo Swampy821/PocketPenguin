@@ -6,6 +6,7 @@ import React from 'react';
 import { Router, Route, Link, browserHistory } from "react-router"
 import Home from "./Home";
 import Details from "./Details/Details";
+import Parties from "./Parties/Parties";
 
 class AppComponent extends React.Component {
   constructor() {
@@ -18,6 +19,7 @@ class AppComponent extends React.Component {
       <Router history={browserHistory}>
         <Route path="/" component={Home} />
         <Route path="/slot/:id" component={Details} />
+        <Route path="/parties" component={Parties} />
       </Router>
     )
   }

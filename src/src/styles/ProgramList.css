@@ -40,3 +40,24 @@
     float: right;
     margin-top: -15px;
 }
+
+.party-image {
+    display:block;
+    float:left;
+}
+
+.party-image > img {
+    height: 50px;
+    margin-right: 13px;
+}
+
+.party-slot {
+    padding: 13px !important;
+}
+
+.slot-chips {
+    float: left;
+    width: 100%;
+    margin-bottom: 12px;
+    margin-top: 7px;
+}

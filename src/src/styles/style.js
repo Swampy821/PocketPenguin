@@ -5,6 +5,8 @@ import {fade} from 'material-ui/utils/colorManipulator';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: white,
+    primary2Color: darkBlack,
+    primary3Color: darkBlack,
     textColor: darkBlack,
     secondaryTextColor: fade(darkBlack, 0.54),
     alternateTextColor: white
