@@ -5,7 +5,7 @@ import muiTheme from "./../../styles/style";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import SearchIcon from "material-ui/svg-icons/action/search";
-// import ScheduleActions from "./../actions/ScheduleActions";
+import PartiesActions from "./../../actions/PartiesActions";
 
 const style = {
     textAlign: "center",
@@ -27,7 +27,7 @@ class PartySearch extends Component {
         super(props);
     }
     onChange(e, val) {
-        // ScheduleActions.search(val);
+        PartiesActions.search(val);
     }
     render() {
         return (

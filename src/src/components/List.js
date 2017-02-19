@@ -22,9 +22,7 @@ class List extends Component {
         }
     }
     componentWillMount(){
-        // this.style.width = (screen.width-50) + "px";
         ScheduleStore.listen((state) => {
-            // this.buildIntoTimeslots(state.days.Days)
             this.setState({days: state.days})
         });
         let auth = AuthStore.getState().auth;

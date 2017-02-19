@@ -9,16 +9,22 @@ import (
 
 func AddRoutes(m *martini.ClassicMartini) {
 
-	log.Print("Adding auth /api/auth")
+	log.Print("Adding route /api/auth")
 	m.Post("/api/auth", api.Auth)
 
-	log.Print("Adding auth /api/rsvp")
+	log.Print("Adding route /api/rsvp")
 	m.Post("/api/rsvp", api.RSVP)
 
-	log.Print("Adding auth /api/schedule")
+	log.Print("Adding route /api/schedule")
 	m.Get("/api/schedule", api.Schedule)
 
-	log.Print("Adding auth /api/schedule/day")
+	log.Print("Adding route /api/schedule/day")
 	m.Get("/api/schedule/day", api.ScheduleByDay)
+
+	log.Print("Adding route /api/parties")
+	m.Get("/api/parties", api.Parties)
+
+	log.Print("Adding post /api/parties/star")
+	m.Post("/api/parties/star", api.PartiesStar)
 
 }
