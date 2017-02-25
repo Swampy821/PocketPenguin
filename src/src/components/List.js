@@ -34,6 +34,11 @@ class List extends Component {
         this.setState({
             auth
         });
+
+
+        
+
+
     }
 
     filterState(filter, data ) {
@@ -58,7 +63,6 @@ class List extends Component {
                 return newDay;
             }
         });
-
         this.setState({
             days
         });

@@ -49,7 +49,6 @@ class MyCalendar extends Component {
     }
 
     render() {
-
         return (
             <div style={style}>
                 <div>
@@ -57,7 +56,9 @@ class MyCalendar extends Component {
                     <HeaderBar />  
                     <Search />
                 </div>
-                <List filter={this.state.sched} goFilter={true} calID={this.props.params.id}/>
+                {this.state.sched && this.state.sched.length ? 
+                <List filter={this.state.sched} goFilter={true} calID={this.props.params.id}/> : "" 
+                }
 
             </div>
             </div>

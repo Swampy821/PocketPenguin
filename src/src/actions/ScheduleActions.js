@@ -7,14 +7,27 @@ import api from "../api";
 class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
-        api.get({
-            url: "/schedule/day",
-            jwt: auth.JWT,
-            data: {}
-        })
-        .then( (data) => {
-            this.actions.scheduleUpdate(data.body);
-        });
+        let savedData = localStorage.getItem("scheduleByDay");
+        try{
+            savedData = JSON.parse(savedData);
+        }catch(e){}
+        if(!savedData && savedData !== undefined) {
+            api.get({
+                url: "/schedule/day",
+                jwt: auth.JWT,
+                data: {}
+            })
+            .then( (data) => {
+                if(data.text !== "") {
+                    localStorage.setItem("scheduleByDay", data.text);
+                }
+                this.actions.scheduleUpdate(data.body);
+            });
+        }else{
+            setTimeout(() => {
+                this.actions.scheduleUpdate(savedData);
+            });
+        }
     }
 
     getScheduleSlot(id) {
