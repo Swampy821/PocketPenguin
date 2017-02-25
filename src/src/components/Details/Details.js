@@ -29,9 +29,13 @@ class Details extends Component {
                     slot: ScheduleStore.getState()[this.props.params.id]
                 });
             }
+            if(ScheduleStore.getState()[this.props.params.id] === undefined) {
+                ScheduleActions.getScheduleSlot(this.props.params.id);
+            }
+            
         });
         ScheduleActions.getScheduleByDay(this.state.auth)
-        ScheduleActions.getScheduleSlot(this.props.params.id);
+        // ScheduleActions.getScheduleSlot(this.props.params.id);
 
     }
 
@@ -40,7 +44,6 @@ class Details extends Component {
     }
 
     render() {
-        console.log(this.state);
         const buttonStyle = {
             width: "100%"
         };

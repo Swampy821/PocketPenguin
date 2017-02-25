@@ -15,7 +15,8 @@ class ScheduleStore {
         this.bindListeners({
             handleScheduleUpdate: ScheduleActions.SCHEDULE_UPDATE,
             handleSearch: ScheduleActions.SEARCH,
-            handleGetSlot: ScheduleActions.GET_SCHEDULE_SLOT
+            handleGetSlot: ScheduleActions.GET_SCHEDULE_SLOT,
+            handleIdSchedule: ScheduleActions.SCHEDULE_ID_UPDATE
             
         });
     }
@@ -107,6 +108,11 @@ class ScheduleStore {
             days: sched
         });
         
+    }
+    handleIdSchedule({id, data}) {
+        this.setState({
+            [id]: data.body
+        });
     }
 }
 

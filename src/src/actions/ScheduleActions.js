@@ -7,7 +7,6 @@ import api from "../api";
 class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
-        this.dispatch();
         api.get({
             url: "/schedule/day",
             jwt: auth.JWT,
@@ -31,6 +30,23 @@ class ScheduleActions {
 
     search(val) {
         this.dispatch(val);
+    }
+
+    scheduleIdUpdate(id, data) {
+        this.dispatch({
+            id,
+            data
+        });
+    }
+
+    getScheduleById(id) {
+        this.dispatch();
+        api.get({
+            url: `/schedule/${id}`
+        })
+        .then( (data) => {
+            this.actions.scheduleIdUpdate(id, data);
+        });
     }
 
 

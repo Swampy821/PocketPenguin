@@ -92,8 +92,16 @@ class HeaderBar extends Component {
             return <MenuItem 
                 primaryText="Your Calendar" 
                 leftIcon={<EventIcon />}
+                onClick={this.showMyCalendar.bind(this)}
             />;
         }
+    }
+
+    showMyCalendar() {
+        const ID = this.state.ID;
+        browserHistory.push(`/calendar/${ID}`);
+        this.close();
+
     }
     logout() {
         this.state = {

@@ -23,11 +23,44 @@ class List extends Component {
     }
     componentWillMount(){
         ScheduleStore.listen((state) => {
-            this.setState({days: state.days})
+            if(this.props.filter) {
+                this.filterState(this.props.filter, state.days);
+            }else if(!this.props.goFilter) {
+                this.setState({days: state.days})
+            }
         });
         let auth = AuthStore.getState().auth;
         ScheduleActions.getScheduleByDay(auth);
     }
+
+    filterState(filter, data ) {
+        const days = data.map(day => {
+            let newDay = {
+                Day: day.Day,
+                Slots: {}
+            };
+
+            Object.keys(day.Slots).forEach(key => {
+                const slotsArray = day.Slots[key].filter(slot => {
+                    if(filter.indexOf(slot.id) > -1) {
+                        return slot;
+                    }
+                });
+
+                if(slotsArray.length) {
+                    newDay.Slots[key] = slotsArray;
+                }
+            });
+            if( Object.keys(newDay.Slots) ) {
+                return newDay;
+            }
+        });
+
+        this.setState({
+            days
+        });
+    }
+
     getDay(dayNumber) {
         switch(dayNumber) {
             case 0: 
@@ -67,6 +100,7 @@ class List extends Component {
             zIndex: 2,
             borderBottom: "1px solid #ccc"
         };
+        
         return (
             <div>
                 <div className="programList">

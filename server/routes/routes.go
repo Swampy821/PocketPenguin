@@ -27,4 +27,7 @@ func AddRoutes(m *martini.ClassicMartini) {
 	log.Print("Adding post /api/parties/star")
 	m.Post("/api/parties/star", api.PartiesStar)
 
+	log.Print("Added route /api/schedule/{id}")
+	m.Get("/api/schedule/:id", api.ScheduleById)
+
 }

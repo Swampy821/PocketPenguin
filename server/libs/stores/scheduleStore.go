@@ -61,7 +61,13 @@ func ScheduleByDay() types.ScheduleDays {
 		}
 
 	}
-
 	return endSched
 
+}
+
+func ScheduleById(id string) []string {
+	collection := Session.DB("PP").C("users")
+	var result types.AuthTypeNoAccess
+	collection.Find(bson.M{"id": id}).One(&result)
+	return result.SavedSchedule
 }
