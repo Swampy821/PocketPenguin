@@ -3,3 +3,10 @@ help: ## Display help
 
 start: ## Start containers
 	@docker-compose up -d
+
+
+prod-build: ## Build Prod Things
+	@cd src && \
+	npm run dist && \
+	cd ../server && \
+	GOOS=linux go build -o ./../bin/pocketpenguin main.go
