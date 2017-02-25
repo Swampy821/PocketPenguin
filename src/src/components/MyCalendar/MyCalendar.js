@@ -10,7 +10,12 @@ import muiTheme from "./../../styles/style";
 import List from "./../List";
 import Search from "./../Search";
 
-class Details extends Component {
+const style = {
+    marginTop: "30px"
+};
+
+
+class MyCalendar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +51,7 @@ class Details extends Component {
     render() {
 
         return (
-            <div>
+            <div style={style}>
                 <div>
                 <div className="stickier">
                     <HeaderBar />  
@@ -61,4 +66,4 @@ class Details extends Component {
 }
 
 
-export default Details;
+export default MyCalendar;
