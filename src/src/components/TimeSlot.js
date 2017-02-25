@@ -51,7 +51,7 @@ class TimeSlot extends Component {
                         {
                             this.props.slots.map((item, index) => {
                                 if(item.show) {
-                                    return (<Slot key={index} rsvp={true} id={item.id} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)}/>)
+                                    return (<Slot key={index} rsvp={true} id={item.id} title={item.Title} location={item.Room} time={this.formatTime(this.props.time)} calID={this.props.calID} auth={this.props.auth}/>)
                                 }
 
                             })

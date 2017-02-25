@@ -52,7 +52,7 @@ class Details extends Component {
                     <HeaderBar />  
                     <Search />
                 </div>
-                <List filter={this.state.sched} goFilter={true}/>
+                <List filter={this.state.sched} goFilter={true} calID={this.props.params.id}/>
 
             </div>
             </div>

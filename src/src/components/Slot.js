@@ -17,7 +17,7 @@ class Slot extends Component {
         this.state = {}
     }
     componentWillMount(){
-        
+
     }
 
     onClick(e) {
@@ -38,10 +38,10 @@ class Slot extends Component {
                     <div className="slot-description">
                         <RoomIcon style={iconStyle}/> {this.props.location}
                         
-
+                        {this.props.auth.ID === this.props.calID || this.props.calID === undefined ? 
                         <div className="rsvp-button">
                             <RSVPButton id={this.props.id}/>
-                        </div>
+                        </div> : ""}
                     </div>
 
 

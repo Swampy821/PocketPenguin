@@ -31,6 +31,9 @@ class List extends Component {
         });
         let auth = AuthStore.getState().auth;
         ScheduleActions.getScheduleByDay(auth);
+        this.setState({
+            auth
+        });
     }
 
     filterState(filter, data ) {
@@ -121,7 +124,7 @@ class List extends Component {
                                     <StickyContainer>
 
                                     {Object.keys(day.Slots).map((key, index) => {
-                                        return <TimeSlot key={key+index} time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id}/>
+                                        return <TimeSlot key={key+index} time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id} calID={this.props.calID} auth={this.state.auth}/>
                                     })}
                                     </StickyContainer>
                                 </div>
