@@ -1,8 +1,6 @@
 package stores
 
 import (
-	"log"
-
 	"github.com/swampy821/pocketpenguin/server/libs/access"
 	"github.com/swampy821/pocketpenguin/server/types"
 	"gopkg.in/mgo.v2/bson"
@@ -12,13 +10,12 @@ func AuthGet(ID string) (types.AuthTypeNoAccess, error) {
 	collection := Session.DB("PP").C("users")
 	var result types.AuthTypeNoAccess
 	err := collection.Find(bson.M{"id": ID}).One(&result)
-	log.Print(result)
 	return result, err
 }
 
 func AuthSave(auth types.AuthType) (types.AuthTypeNoAccess, error) {
 	collection := Session.DB("PP").C("users")
-	saveAuth := types.AuthTypeNoAccess{Email: auth.Email, ID: auth.ID, Picture: auth.Picture.Data.URL}
+	saveAuth := types.AuthTypeNoAccess{Email: auth.Email, ID: auth.ID, Name: auth.Name, Picture: auth.Picture.Data.URL}
 	err := collection.Insert(saveAuth)
 	return saveAuth, err
 }

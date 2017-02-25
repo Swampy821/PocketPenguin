@@ -9,6 +9,7 @@ type picture struct {
 }
 
 type AuthType struct {
+	Name          string `json:"name"`
 	AccessToken   string `json:"accessToken"`
 	Email         string `json:"email"`
 	ID            string `json:"id"`
@@ -25,6 +26,7 @@ type pictureNA struct {
 }
 
 type AuthTypeNoAccess struct {
+	Name          string
 	Email         string
 	ID            string
 	Picture       string
