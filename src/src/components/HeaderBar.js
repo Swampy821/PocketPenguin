@@ -35,13 +35,13 @@ class HeaderBar extends Component {
     }
     showProgramList() {
         browserHistory.push("/");
-        this.close();
+        this.closeMenu();
     }
 
 
     showParties() {
         browserHistory.push("/parties");
-        this.close();
+        this.closeMenu();
     }
 
 
@@ -52,7 +52,7 @@ class HeaderBar extends Component {
        });
     }
 
-    close() {
+    closeMenu() {
         this.setState({
             open: false
         });
@@ -100,7 +100,7 @@ class HeaderBar extends Component {
     showMyCalendar() {
         const ID = this.state.ID;
         browserHistory.push(`/calendar/${ID}`);
-        this.close();
+        this.closeMenu();
 
     }
     logout() {
@@ -125,7 +125,7 @@ class HeaderBar extends Component {
                     <MenuItem 
                         primaryText="Close" 
                         leftIcon={<CloseIcon />}
-                        onClick={this.close.bind(this)}
+                        onClick={this.closeMenu.bind(this)}
                     />
                     <MenuItem 
                         primaryText="Program List"
