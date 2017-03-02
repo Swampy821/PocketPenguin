@@ -66,7 +66,7 @@ class RSVPButton extends Component {
         if(!this.getRSVPStatus()) {
             this.buttonStyle.color = "black";
         } else {
-            this.buttonStyle.color = "#b3e5fc";
+            this.buttonStyle.color = "#0288D1";
         }
         if(this.state.show) {
             return (
