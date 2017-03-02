@@ -91,7 +91,9 @@ class ScheduleStore {
                 day.Slots[index] = day.Slots[index].map((slot) => {
                     if(
                         slot.Title.toLowerCase().indexOf(val.toLowerCase())>-1 ||
-                        slot.Room.toLowerCase().indexOf(val.toLowerCase())>-1
+                        slot.Room.toLowerCase().indexOf(val.toLowerCase())>-1 ||
+                        slot.Presenter.toLowerCase().indexOf(val.toLowerCase())>-1 ||
+                        slot.Topic.toLowerCase().indexOf(val.toLowerCase())>-1
                         
                     ) {
                         slot.show = true;

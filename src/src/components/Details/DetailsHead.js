@@ -2,11 +2,17 @@
 import React, {Component} from "react";
 import ScheduleIcon from "material-ui/svg-icons/action/schedule";
 import RoomIcon from "material-ui/svg-icons/action/room";
+import TrackIcon from "material-ui/svg-icons/image/collections-bookmark";
+import PersonIcon from "material-ui/svg-icons/social/person";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../../styles/style";
 import moment from "moment";
 import RSVPButton from "./../RSVPButton";
+const roomIconStyle = {
+    color: "#999999",
+    marginBottom: "-6px"
+}
 
 class DetailsHead extends Component {
     constructor(props) {
@@ -38,13 +44,31 @@ class DetailsHead extends Component {
         }
     }
 
+
+    getTrack() {
+        if(this.props.slot.Topic) {
+            return <span><TrackIcon style={roomIconStyle} /> {this.props.slot.Topic} <br /></span>;
+        }
+        
+        return "";
+        
+    }
+
+
+    getSpeaker() {
+        if(this.props.slot.Presenter) {
+            return <span><PersonIcon style={roomIconStyle} /> {this.props.slot.Presenter} <br /></span>;
+        }
+        
+        return "";
+        
+    }
+
+
     render() {
         const fday = new Date(this.props.slot.Day);
         const dayString = this.getDay(fday.getDay());
-        const roomIconStyle = {
-            color: "#999999",
-            marginBottom: "-6px"
-        }
+
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div className="slot-details">
@@ -53,6 +77,8 @@ class DetailsHead extends Component {
                         <ScheduleIcon /> {dayString} from {this.formatTime(this.props.slot.Time)} - {this.formatTime(this.props.slot.EndTime)}
                     </div>
                     <div className="slot-details-room">
+                        {this.getSpeaker()}
+                        {this.getTrack()}
                         <RoomIcon style={roomIconStyle} /> {this.props.slot.Room}
                     </div>
                     <div className="slot-details-rsvp">
