@@ -9,6 +9,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../../styles/style";
 import moment from "moment";
 import RSVPButton from "./../RSVPButton";
+
 const roomIconStyle = {
     color: "#999999",
     marginBottom: "-6px"

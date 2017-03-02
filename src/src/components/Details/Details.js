@@ -9,6 +9,7 @@ import FlatButton from "material-ui/FlatButton";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../../styles/style";
 import DetailsDescription from "./DetailsDescription";
+import BackButton from "./../BackButton";
 
 
 class Details extends Component {
@@ -52,6 +53,7 @@ class Details extends Component {
             <div>
                 <div className="stickier">
                     <HeaderBar />  
+                    <BackButton />
                 </div>
                 <DetailsHead slot={this.state.slot}/>
                 <hr />
