@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import AppBar from './Extensions/AppBar';
 import muiTheme from './../styles/style';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -118,6 +118,7 @@ class HeaderBar extends Component {
                 <AppBar 
                     title={this.getTitle()}
                     onLeftIconButtonTouchTap={this.go.bind(this)}
+                    imageLeft="./assets/phone_go_gopher_80.png"
                     />
             </MuiThemeProvider>
             <MuiThemeProvider muiTheme={muiTheme}>
