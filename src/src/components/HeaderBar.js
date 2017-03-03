@@ -118,7 +118,7 @@ class HeaderBar extends Component {
                 <AppBar 
                     title={this.getTitle()}
                     onLeftIconButtonTouchTap={this.go.bind(this)}
-                    imageLeft="./assets/phone_go_gopher_80.png"
+                    imageLeft="https://pocketpenguin.party/assets/phone_go_gopher_80.png"
                     />
             </MuiThemeProvider>
             <MuiThemeProvider muiTheme={muiTheme}>
