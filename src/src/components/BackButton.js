@@ -6,6 +6,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../styles/style";
 import FlatButton from "material-ui/FlatButton";
 import BackIcon from "material-ui/svg-icons/hardware/keyboard-return";
+import { browserHistory } from "react-router";
 
 const buttonStyle = {
     width: "100%",
