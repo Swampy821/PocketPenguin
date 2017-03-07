@@ -11,6 +11,8 @@ import Chip from "material-ui/Chip";
 import RoomIcon from "material-ui/svg-icons/action/room";
 import ScheduleIcon from "material-ui/svg-icons/action/schedule";
 import PartiesActions from "./../../actions/PartiesActions";
+import renderHTML from 'react-render-html';
+
 
 const chipStyle = {
     float: "left",
@@ -62,7 +64,7 @@ class Party extends Component {
                     </div>
                     
                     <div className="slot-description">
-                        {this.props.Description}
+                        {renderHTML(this.props.Description)}
                     </div>
                     <div className="slot-chips">
                         {this.state.Chips.map((item, index) => {

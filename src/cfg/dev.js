@@ -36,4 +36,10 @@ config.module.loaders.push({
   )
 });
 
+config.module.loaders.push({
+  // do not exclude node_modules, since map.json is in node_modules
+  test: /\.json$/,
+  loader: 'json'
+});
+
 module.exports = config;
