@@ -18,28 +18,37 @@ class Details extends Component {
         this.state = {
             slot: {}
         };
+        this._onAuthListen = this._onAuthListen.bind(this);
+        this._onListen = this._onListen.bind(this);
     }
     componentDidMount() {
 
-        AuthStore.listen((auth) => {
-            this.setState(auth.auth);
-        });
-        ScheduleStore.listen(() => {
-            if(ScheduleStore.getState()[this.props.params.id]) {
-                this.setState({
-                    slot: ScheduleStore.getState()[this.props.params.id]
-                });
-            }
-            if(ScheduleStore.getState()[this.props.params.id] === undefined) {
-                ScheduleActions.getScheduleSlot(this.props.params.id);
-            }
-            
-        });
+        AuthStore.listen(this._onAuthListen);
+        ScheduleStore.listen(this._onListen);
         ScheduleActions.getScheduleByDay(this.state.auth)
-        // ScheduleActions.getScheduleSlot(this.props.params.id);
 
     }
 
+
+    componentWillUnmount () {
+        ScheduleStore.unlisten(this._onListen);
+        AuthStore.unlisten(this._onAuthListen);
+    }
+
+    _onAuthListen(auth) {
+        this.setState(auth.auth);
+    }
+
+    _onListen() {
+        if(ScheduleStore.getState()[this.props.params.id]) {
+            this.setState({
+                slot: ScheduleStore.getState()[this.props.params.id]
+            });
+        }
+        if(ScheduleStore.getState()[this.props.params.id] === undefined) {
+            ScheduleActions.getScheduleSlot(this.props.params.id);
+        }
+    }
     onBackClick() {
 
     }

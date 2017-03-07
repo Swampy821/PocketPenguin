@@ -20,25 +20,32 @@ class List extends Component {
         this.state = {
             days: []
         }
+        this._onListen = this._onListen.bind(this);
     }
     componentWillMount(){
-        ScheduleStore.listen((state) => {
-            if(this.props.filter) {
-                this.filterState(this.props.filter, state.days);
-            }else if(!this.props.goFilter) {
-                this.setState({days: state.days})
-            }
-        });
+        let schedState = ScheduleStore.getState();
+        if(schedState.flat) {
+            this.setState({days: schedState.days})
+        }else{
+            ScheduleActions.getScheduleByDay(auth);
+        }            
+        ScheduleStore.listen(this._onListen);
         let auth = AuthStore.getState().auth;
-        ScheduleActions.getScheduleByDay(auth);
         this.setState({
             auth
         });
+    }
 
+    componentWillUnmount () {
+        ScheduleStore.unlisten(this._onListen);
+    }
 
-        
-
-
+    _onListen(state) {
+        if(this.props.filter) {
+            this.filterState(this.props.filter, state.days);
+        }else if(!this.props.goFilter) {
+            this.setState({days: state.days})
+        }
     }
 
     filterState(filter, data ) {

@@ -30,10 +30,13 @@ class TimeSlot extends Component {
     }
 
     show() {
-        const showing = this.props.slots.filter((item) => {
-            return item.show;
-        });
-        return showing.length > 0;
+        let show = false;
+        for(var i=0; i<this.props.slots.length; i++) {
+            if(this.props.slots[i].show) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
