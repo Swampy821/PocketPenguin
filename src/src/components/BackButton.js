@@ -20,7 +20,7 @@ class BackButton extends Component {
     }
     
     onClick() {
-        window.history.back();
+        browserHistory.push(`/`);
     }
 
     render() {
