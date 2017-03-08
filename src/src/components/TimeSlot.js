@@ -39,6 +39,10 @@ class TimeSlot extends Component {
         return false;
     }
 
+    renderTheSlots() {
+
+    }
+
 
     render() {
         if(this.show()) {
@@ -51,8 +55,7 @@ class TimeSlot extends Component {
                                 </div>
                             </div>
                         </sticky>
-                        {
-                            this.props.slots.map((item, index) => {
+                        {this.props.slots.map((item, index) => {
                                 if(item.show) {
                                     return (<Slot 
                                         key={index} 

@@ -75,14 +75,14 @@ class Party extends Component {
                         <RoomIcon style={{marginBottom: "-8px"}}/> {this.props.Location}<br />
                         <ScheduleIcon style={{marginBottom: "-8px", marginTop: "8px"}}/>   {this.props.Time}
                     </div>
-                    <div className="slot-likes">
+                    {/*<div className="slot-likes">
                         {this.props.Stars} Stars
                     </div>
                     <div className="slot-like-button">
                         <FloatingActionButton backgroundColor={indigo500} mini={true} onClick={this.onClick.bind(this)}>
                             {this.props.Star ? <StarIcon /> : <StarIconEmpty />}
                         </FloatingActionButton>
-                    </div>
+                    </div>*/}
 
 
                 </div>

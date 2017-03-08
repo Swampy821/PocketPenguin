@@ -21,24 +21,38 @@ class MyCalendar extends Component {
         this.state = {
             slot: {}
         };
+        this._scheduleStoreListen = this._scheduleStoreListen.bind(this);
     }
     componentDidMount() {
         const id = this.props.params.id;
+        let savedStoreData = ScheduleStore.getState();
+        if(savedStoreData.flat) {
+            this.buildData(savedStoreData);
+        }
+        
+        this.setState({
+            id
+        });
         ScheduleActions.getScheduleById(id);
         
 
         AuthStore.listen((auth) => {
             this.setState(auth.auth);
         });
-        ScheduleStore.listen(() => {
+        ScheduleStore.listen(this._scheduleStoreListen);
+
+    }
+    componentWillUnmount () {
+        ScheduleStore.unlisten(this._scheduleStoreListen);
+    }
+
+    _scheduleStoreListen() {
             const StoreData = ScheduleStore.getState();
             if(StoreData.flat === undefined) {
                 ScheduleActions.getScheduleByDay();
             }else{
-                this.buildData(StoreData, id);
+                this.buildData(StoreData, this.state.id);
             }
-        });
-
     }
 
     buildData(StoreData, id) {

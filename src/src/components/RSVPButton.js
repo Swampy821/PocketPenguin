@@ -18,7 +18,7 @@ class RSVPButton extends Component {
         super(props);
         this.state = {
             rsvp: this.props.rsvp,
-            show: false
+            show: true
         };
         this.buttonStyle = {
             float: "left"
@@ -27,6 +27,7 @@ class RSVPButton extends Component {
         if(this.props.style) {
             this.buttonStyle = Object.assign(this.buttonStyle, this.props.style);
         }
+        this._authListen = this._authListen.bind(this);
        
     }
     componentWillMount(){
@@ -35,12 +36,18 @@ class RSVPButton extends Component {
         this.setState({
             auth: firstAuth.auth
         });
-        AuthStore.listen(() => {
-            const auth = AuthStore.getState()
-            this.setAuthStatus(auth.auth);
-            this.setState({
-                auth: auth.auth
-            });
+        AuthStore.listen(this._authListen);
+    }
+
+    componentWillUnmount () {
+        AuthStore.unlisten(this._authListen);
+    }
+
+    _authListen() {
+        const auth = AuthStore.getState()
+        this.setAuthStatus(auth.auth);
+        this.setState({
+            auth: auth.auth
         });
     }
 
