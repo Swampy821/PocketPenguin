@@ -22,15 +22,15 @@ class ScheduleStore {
     }
 
     componentWillMount() {
-        let schedule = localStorage.getItem("scheduleState");
-        try{
-            schedule = JSON.stringify(schedule);
-            this.setState(schedule);
-        }catch(e){}
+        // let schedule = localStorage.getItem("scheduleState");
+        // try{
+        //     schedule = JSON.stringify(schedule);
+        //     this.setState(schedule);
+        // }catch(e){}
     }
     
     componentDidUpdate() {
-        localStorage.setItem("scheduleState", JSON.stringify(this.state));
+        // localStorage.setItem("scheduleState", JSON.stringify(this.state));
     }
 
 
