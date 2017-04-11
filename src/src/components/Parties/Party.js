@@ -53,7 +53,7 @@ class Party extends Component {
         }
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div className="slot party-slot" style={{cursor: "pointer"}}> 
+                <div className="slot party-slot" style={{cursor: "default"}}> 
                     {this.props.Image ? 
                         <div className="party-image">
                             <img src={this.props.Image} />
