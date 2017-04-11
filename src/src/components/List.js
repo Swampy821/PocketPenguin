@@ -130,7 +130,9 @@ class List extends Component {
                             let dayString = this.getDay(fday.getDay());
                             let dayNumber = fday.getDate();
                             if( dayNumber < 10) { dayNumber = "0" + dayNumber; }   
-
+                            const sortedArr = Object.keys(day.Slots).sort((a, b) => {
+                                return parseInt(a.split(":")[0]) > parseInt(b.split(":")[0]) ? 1 : -1;
+                            });
                             return (
                                 <div>
                                     <Sticky stickyStyle={customStyleObject} topOffset={-150}>
@@ -138,7 +140,7 @@ class List extends Component {
                                     </Sticky>
                                     <StickyContainer>
 
-                                    {Object.keys(day.Slots).map((key, index) => {
+                                    {sortedArr.map((key, index) => {
                                         return <TimeSlot key={key+index} time={day.Slots[key][0].Time} slots={day.Slots[key]} id={day.Slots[key].id} calID={this.props.calID} auth={this.state.auth}/>
                                     })}
                                     </StickyContainer>
