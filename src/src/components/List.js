@@ -34,6 +34,9 @@ class List extends Component {
         this.setState({
             auth
         });
+
+        this._onListen(ScheduleStore.getState());
+
     }
 
     componentWillUnmount () {
@@ -70,6 +73,7 @@ class List extends Component {
                 return newDay;
             }
         });
+
         this.setState({
             days
         });

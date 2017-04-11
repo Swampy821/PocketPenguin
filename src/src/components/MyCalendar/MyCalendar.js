@@ -25,11 +25,6 @@ class MyCalendar extends Component {
     }
     componentDidMount() {
         const id = this.props.params.id;
-        let savedStoreData = ScheduleStore.getState();
-        if(savedStoreData.flat) {
-            this.buildData(savedStoreData);
-        }
-        
         this.setState({
             id
         });
