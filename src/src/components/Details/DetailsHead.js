@@ -82,9 +82,9 @@ class DetailsHead extends Component {
                         {this.getTrack()}
                         <RoomIcon style={roomIconStyle} /> {this.props.slot.Room}
                     </div>
-                    <div className="slot-details-rsvp">
+                    {/*<div className="slot-details-rsvp">
                         <RSVPButton show={false} rsvp={true} style={{width: "100%", marginTop: "5px"}}/>
-                    </div>
+                    </div>*/}
                 </div>
             </MuiThemeProvider>
         );
