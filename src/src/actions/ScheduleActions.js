@@ -7,7 +7,7 @@ import api from "../api";
 class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
-        let savedData = localStorage.getItem("scheduleByDay2");
+        let savedData = localStorage.getItem("scheduleByDay3");
         try{
             savedData = JSON.parse(savedData);
         }catch(e){}
@@ -19,7 +19,7 @@ class ScheduleActions {
             })
             .then( (data) => {
                 if(data.text !== "") {
-                    localStorage.setItem("scheduleByDay2", data.text);
+                    localStorage.setItem("scheduleByDay3", data.text);
                 }
                 this.actions.scheduleUpdate(data.body);
             });
