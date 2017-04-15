@@ -80,7 +80,7 @@ class RSVPButton extends Component {
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <FlatButton
                         style={this.buttonStyle}
-                        onTouchTap={this.onClick.bind(this)}
+                        onClick={this.onClick.bind(this)}
                         label="RSVP"
                         icon={this.getRSVPStatus() ? <StarIcon /> : <StarIconEmpty  />}
                         />
