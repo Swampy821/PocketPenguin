@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import HeaderBar from "./HeaderBar"
 import ProgramList from "./ProgramList";
 import Search from "./Search";
+import Cookie from 'react-cookie';
 
 class Home extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Home extends Component {
 
     handleScroll() {
         if(window.scrollY) {
-            localStorage.setItem("lastScrollY", window.scrollY);
+            Cookie.save("lastScrollY", window.scrollY, { path: '/' });
         }
     }
     componentWillMount() {
@@ -21,7 +22,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const lastScroll = localStorage.getItem("lastScrollY");
+        const lastScroll = Cookie.load("lastScrollY");
         setTimeout(() => {
             window.scroll(0, lastScroll);
         },5);

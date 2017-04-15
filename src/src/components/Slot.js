@@ -27,7 +27,7 @@ class Slot extends Component {
     }
 
     onClick(e) {
-        if(e.target.className.indexOf("slot") > -1) {
+        if(e.target.className && e.target.className.indexOf("slot") > -1) {
             browserHistory.push(`/slot/${this.props.id}`);
             
         }
@@ -64,7 +64,7 @@ class Slot extends Component {
                         
                         {this.props.auth.ID === this.props.calID || this.props.calID === undefined ? 
                         <div className="rsvp-button">
-                            <RSVPButton id={this.props.id}/>
+                            <RSVPButton id={this.props.id} className="rsvpbuttonbutton"/>
                         </div> : ""}
                     </div>
 

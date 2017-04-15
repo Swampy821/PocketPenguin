@@ -36,7 +36,6 @@ class Register extends Component {
     }
 
     _authListener(state) {
-        console.log(state.auth);
         if (state.auth.error) {
             const body = state.auth.error.response.body;
             this.triggerError(body.message);

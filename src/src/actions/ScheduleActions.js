@@ -3,11 +3,12 @@
 import alt from "../alt";
 import api from "../api";
 
-
 class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
-        let savedData = localStorage.getItem("scheduleByDay3");
+        const d = new Date();
+        const hour = d.getHours();
+        let savedData = localStorage.getItem(`scheduleByDay${hour}`);
         try{
             savedData = JSON.parse(savedData);
         }catch(e){}
@@ -19,7 +20,8 @@ class ScheduleActions {
             })
             .then( (data) => {
                 if(data.text !== "") {
-                    localStorage.setItem("scheduleByDay3", data.text);
+                    localStorage.clear();
+                    localStorage.setItem(`scheduleByDay${hour}`, data.text);
                 }
                 this.actions.scheduleUpdate(data.body);
             });

@@ -67,6 +67,9 @@ class RSVPButton extends Component {
     }
 
     onClick() {
+        this.setState({
+            rsvp: !this.state.rsvp
+        });
         AuthActions.updateRSVP(this.props.id, this.state.auth.JWT, !this.getRSVPStatus());
     }
     render() {
@@ -80,7 +83,7 @@ class RSVPButton extends Component {
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <FlatButton
                         style={this.buttonStyle}
-                        onClick={this.onClick.bind(this)}
+                        onTouchTap={this.onClick.bind(this)}
                         label="RSVP"
                         icon={this.getRSVPStatus() ? <StarIcon /> : <StarIconEmpty  />}
                         />

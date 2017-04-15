@@ -25,7 +25,6 @@ class AuthActions {
             data: options
         })
             .then((data) => {
-                console.log(data.body);
                 this.actions.authUpdate(data.body);
             })
             .catch((err) => {

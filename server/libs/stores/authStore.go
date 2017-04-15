@@ -1,8 +1,7 @@
 package stores
 
 import (
-	"os/exec"
-
+	uuid "github.com/satori/go.uuid"
 	"github.com/swampy821/pocketpenguin/server/libs/access"
 	"github.com/swampy821/pocketpenguin/server/types"
 	"golang.org/x/crypto/bcrypt"
@@ -47,8 +46,8 @@ func AuthSave(auth types.AuthType) (types.AuthTypeNoAccess, error) {
 	collection := Session.DB("PP").C("users")
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(auth.Password), bcrypt.DefaultCost)
 	if len(auth.ID) == 0 {
-		out, _ := exec.Command("uuidgen").Output()
-		auth.ID = string(out)
+		out := uuid.NewV4()
+		auth.ID = out.String()
 	}
 	saveAuth := types.AuthTypeSave{Email: auth.Email, ID: auth.ID, Name: auth.Name, Picture: auth.Picture.Data.URL, Username: auth.Username, Password: string(hashedPassword)}
 	err := collection.Insert(saveAuth)

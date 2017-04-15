@@ -3,16 +3,16 @@
 
 import alt  from "../alt";
 import AuthActions from "../actions/AuthActions";
-
+import Cookie from 'react-cookie';
 
 class AuthStore {
     constructor() {
-        let savedAuth = localStorage.getItem("auth");
+        let savedAuth = Cookie.load("auth");
 
         
         this.auth = {};
         if( savedAuth ) {
-            this.auth = JSON.parse(savedAuth);
+            this.auth = savedAuth;
         }
         if( !this.auth.SavedSchedule ) {
             this.auth.SavedSchedule = [];
@@ -26,7 +26,7 @@ class AuthStore {
     }
 
     _saveCache() {
-        localStorage.setItem("auth", JSON.stringify(this.auth));
+        Cookie.save('auth', JSON.stringify(this.auth), { path: '/' });
     }
 
     handleAuthFailed(err) {
@@ -36,7 +36,7 @@ class AuthStore {
     }
     handleLogout() {
         this.auth = {};
-        localStorage.removeItem("auth");
+        Cookie.remove("auth", { path: "/"});
     }
     handleAuth(auth) {
         this.auth = auth;

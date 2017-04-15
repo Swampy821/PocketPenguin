@@ -21,7 +21,6 @@ class BackButton extends Component {
     }
     
     onClick() {
-        console.log('click');
         browserHistory.push(`/`);
     }
 
