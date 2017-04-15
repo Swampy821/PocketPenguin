@@ -21,7 +21,7 @@ class MyCalendar extends Component {
         this.state = {
             slot: {}
         };
-        this._scheduleStoreListen = this._scheduleStoreListen.bind(this);
+        this.scheduleStoreListen = this._scheduleStoreListen.bind(this);
     }
     componentDidMount() {
         const id = this.props.params.id;
@@ -34,11 +34,11 @@ class MyCalendar extends Component {
         AuthStore.listen((auth) => {
             this.setState(auth.auth);
         });
-        ScheduleStore.listen(this._scheduleStoreListen);
+        ScheduleStore.listen(this.scheduleStoreListen);
 
     }
     componentWillUnmount () {
-        ScheduleStore.unlisten(this._scheduleStoreListen);
+        ScheduleStore.unlisten(this.scheduleStoreListen);
     }
 
     _scheduleStoreListen() {

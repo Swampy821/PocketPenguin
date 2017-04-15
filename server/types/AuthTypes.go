@@ -15,6 +15,8 @@ type AuthType struct {
 	ID            string `json:"id"`
 	Picture       data   `json:"picture"`
 	SignedRequest string `json:"signedRequest"`
+	Username      string `json:"username"`
+	Password      string `json:"password"`
 }
 
 type dataNA struct {
@@ -31,5 +33,22 @@ type AuthTypeNoAccess struct {
 	ID            string
 	Picture       string
 	JWT           string
+	Username      string
 	SavedSchedule []string `bson:"SavedSchedule"`
+}
+
+type AuthTypeSave struct {
+	Name          string
+	Email         string
+	ID            string
+	Picture       string
+	JWT           string
+	Username      string
+	Password      string
+	SavedSchedule []string `bson:"SavedSchedule"`
+}
+
+type ErrObj struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
 }

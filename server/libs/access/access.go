@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -30,11 +29,20 @@ type accessValid struct {
 	UserID  string `json:"user_id"`
 }
 
+type access struct {
+	AccessToken string `json:"access_token"`
+}
+
 func GetAppToken() {
 	resp, _ := http.Get("https://graph.facebook.com/oauth/access_token?client_id=433048977029860&client_secret=" + os.Getenv("CLIENT_SECRET") + "&grant_type=client_credentials")
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	clientToken = strings.Split(string(body), "=")[1]
+	// body, _ := ioutil.ReadAll(resp.Body)
+	decoder := json.NewDecoder(resp.Body)
+	var acc access
+	decoder.Decode(&acc)
+	// log.Print(acc.AccessToken)
+	clientToken = acc.AccessToken
+	// clientToken = strings.Split(string(body), "=")[1]
 }
 
 func IsValid(accessKey string) (bool, string, error) {

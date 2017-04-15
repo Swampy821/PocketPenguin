@@ -19,6 +19,7 @@ class AuthStore {
         }
         this.bindListeners({
             handleAuth: AuthActions.AUTH_UPDATE,
+            handleAuthFailed: AuthActions.AUTH_FAILED,
             handleLogout: AuthActions.LOGOUT,
             updateRSVP: AuthActions.UPDATE_RSVP
         });
@@ -28,7 +29,11 @@ class AuthStore {
         localStorage.setItem("auth", JSON.stringify(this.auth));
     }
 
-
+    handleAuthFailed(err) {
+        this.auth = {
+            error: err
+        };
+    }
     handleLogout() {
         this.auth = {};
         localStorage.removeItem("auth");
@@ -36,9 +41,11 @@ class AuthStore {
     handleAuth(auth) {
         this.auth = auth;
         this.auth.SavedScheduleObj = {};
-        this.auth.SavedSchedule.forEach((val) => {
-            this.auth.SavedScheduleObj[val] = true;
-        })
+        if(this.auth.SavedSchedule !== null) {
+            this.auth.SavedSchedule.forEach((val) => {
+                this.auth.SavedScheduleObj[val] = true;
+            })
+        }
         this._saveCache();
     }
 

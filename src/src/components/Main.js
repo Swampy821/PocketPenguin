@@ -8,6 +8,8 @@ import Home from "./Home";
 import Details from "./Details/Details";
 import Parties from "./Parties/Parties";
 import MyCalendar from "./MyCalendar/MyCalendar";
+import Login from "./Login";
+import Register from './Register';
 
 class AppComponent extends React.Component {
   constructor() {
@@ -22,6 +24,8 @@ class AppComponent extends React.Component {
         <Route path="/slot/:id" component={Details} />
         <Route path="/calendar/:id" component={MyCalendar} />
         <Route path="/parties" component={Parties} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Router>
     )
   }

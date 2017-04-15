@@ -12,6 +12,12 @@ func AddRoutes(m *martini.ClassicMartini) {
 	log.Print("Adding route /api/auth")
 	m.Post("/api/auth", api.Auth)
 
+	log.Print("Adding route /api/auth/register")
+	m.Post("/api/auth/register", api.AuthRegister)
+
+	log.Print("Adding route /api/auth/login")
+	m.Post("/api/auth/login", api.AuthLogin)
+
 	log.Print("Adding route /api/rsvp")
 	m.Post("/api/rsvp", api.RSVP)
 

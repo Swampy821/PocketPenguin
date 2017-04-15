@@ -9,6 +9,9 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import TocIcon from 'material-ui/svg-icons/action/toc';
 import EventIcon from 'material-ui/svg-icons/action/event';
 import PeopleIcon from 'material-ui/svg-icons/social/people';
+import FaceIcon from 'material-ui/svg-icons/action/face';
+import InputIcon from 'material-ui/svg-icons/action/input';
+import ReplyIcon from 'material-ui/svg-icons/content/reply';
 import { browserHistory } from 'react-router';
 import alt from "../alt";
 import FacebookLogin from 'react-facebook-login';
@@ -26,12 +29,18 @@ class HeaderBar extends Component {
         this.state = {
             open: false
         };
+        this.authStoreListen = this._authStoreListen.bind(this)
     }
     componentDidMount() {
-        AuthStore.listen((auth) => {
-            this.setState(auth.auth);
-        });
+        AuthStore.listen(this.authStoreListen);
         this.setState(AuthStore.getState().auth);
+    }
+    componentWillUnmount() {
+        AuthStore.unlisten(this.authStoreListen);
+    }
+
+    _authStoreListen(auth) {
+        this.setState(auth.auth);
     }
     showProgramList() {
         browserHistory.push("/");
@@ -71,18 +80,11 @@ class HeaderBar extends Component {
     }
 
 
-    getFacebookButton() {
-        if(!this.state.ID) {
-            return <FacebookLogin
-            appId="433048977029860"
-            autoLoad={false}
-            fields="name,email,picture"
-            scope="public_profile,email"
-            callback={this.responseFacebook.bind(this)}
-            />;
-        } else {
+    getLogoutButton() {
+        if(this.state.ID) {
             return <MenuItem
                 primaryText="Logout"
+                leftIcon={<ReplyIcon />}
                 onClick={this.logout.bind(this)}
             />;
         }
@@ -103,6 +105,15 @@ class HeaderBar extends Component {
         this.closeMenu();
 
     }
+
+    showLogin() {
+        browserHistory.push(`/login`);
+        this.closeMenu();
+    }
+    showRegister() {
+        browserHistory.push(`/register`);
+        this.closeMenu();
+    }
     logout() {
         this.state = {
             open: false
@@ -110,6 +121,25 @@ class HeaderBar extends Component {
         AuthActions.logout();
     }
 
+    getLogin() {
+        if(!this.state.ID) {
+            return <MenuItem 
+                primaryText="Login"
+                leftIcon={<FaceIcon />}
+                onClick={this.showLogin.bind(this)}
+            />
+        }        
+    }
+
+    getRegister() {
+        if(!this.state.ID) {
+            return <MenuItem 
+                primaryText="Register"
+                leftIcon={<InputIcon />}
+                onClick={this.showRegister.bind(this)}
+            />
+        }   
+    }
 
     render() {
         return (
@@ -139,7 +169,9 @@ class HeaderBar extends Component {
                         leftIcon={<PeopleIcon />}
                         onClick={this.showParties.bind(this)}
                     />
-                    {this.getFacebookButton()}
+                    {this.getLogin()}
+                    {this.getRegister()}
+                    {this.getLogoutButton()}
                 </Drawer>
             </MuiThemeProvider>
             </div>
