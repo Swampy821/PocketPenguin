@@ -3,20 +3,21 @@
 
 import alt  from "../alt";
 import ScheduleActions from "../actions/ScheduleActions";
-
+import AuthActions from "./../actions/AuthActions";
 
 class ScheduleStore {
     constructor() {
-
-
         this.state = {
-            days: []
+            days: [],
+            myCalDataPulled: false,
+            myCalData: {}
         }
         this.bindListeners({
             handleScheduleUpdate: ScheduleActions.SCHEDULE_UPDATE,
             handleSearch: ScheduleActions.SEARCH,
             handleGetSlot: ScheduleActions.GET_SCHEDULE_SLOT,
-            handleIdSchedule: ScheduleActions.SCHEDULE_ID_UPDATE
+            handleIdSchedule: ScheduleActions.SCHEDULE_ID_UPDATE,
+            handleInfoGet: AuthActions.INFO_SUCCESS
             
         });
     }
@@ -64,7 +65,13 @@ class ScheduleStore {
         return dayArray;
     }
 
+    handleInfoGet(data) {
+        this.setState({
+            myCalDataPulled: true,
+            myCalData: data
+        });
 
+    }
     handleGetSlot(id) {
         const filtered = this.state.flat.filter((item) => {
             if(item.id === id) {

@@ -9,6 +9,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import muiTheme from "./../../styles/style";
 import List from "./../List";
 import Search from "./../Search";
+import AuthActions from "./../../actions/AuthActions";
 
 const style = {
     marginTop: "30px"
@@ -29,7 +30,7 @@ class MyCalendar extends Component {
             id
         });
         ScheduleActions.getScheduleById(id);
-        
+        AuthActions.getInfo(id);
 
         AuthStore.listen((auth) => {
             this.setState(auth.auth);
@@ -48,6 +49,11 @@ class MyCalendar extends Component {
             }else{
                 this.buildData(StoreData, this.state.id);
             }
+            if (StoreData.myCalDataPulled) {
+                this.setState({
+                    myCalInfo: StoreData.myCalData
+                });
+            }
     }
 
     buildData(StoreData, id) {
@@ -57,12 +63,19 @@ class MyCalendar extends Component {
         })
     }
 
+    getTitle() {
+        if (this.state.myCalInfo) {
+            return `${this.state.myCalInfo.name}'s Pocket Penguin`;
+        }
+        return false;
+    }
+
     render() {
         return (
             <div style={style}>
                 <div>
                 <div className="stickier">
-                    <HeaderBar />  
+                    <HeaderBar title={this.getTitle()}/>  
                     <Search />
                 </div>
                 {this.state.sched && this.state.sched.length ? 

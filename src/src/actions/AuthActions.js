@@ -72,6 +72,27 @@ class AuthActions {
         });
     }
 
+
+    getInfo(id) {
+        api.get({
+            url: `/auth/${id}`
+        })
+        .then((data) => {
+            this.actions.infoSuccess(data.body);
+        })
+        .catch(() => {
+            this.actions.infoFail();
+        });
+    }
+
+    infoSuccess(data) {
+        this.dispatch(data);
+    }
+
+    infoFail() {
+        this.dispatch();
+    }
+
 }
 
 module.exports = alt.createActions(AuthActions);

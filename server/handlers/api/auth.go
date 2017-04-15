@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/swampy821/pocketpenguin/server/libs/access"
 	"github.com/swampy821/pocketpenguin/server/libs/stores"
@@ -110,4 +111,24 @@ func AuthLogin(w http.ResponseWriter, r *http.Request, rend render.Render) {
 	access.GetJWTToken(&storedAuth)
 
 	rend.JSON(200, storedAuth)
+}
+
+func AuthGet(w http.ResponseWriter, r *http.Request, rend render.Render, parms martini.Params) {
+	id := parms["id"]
+	auth, err := stores.AuthGet(id, "", "")
+
+	if err != nil {
+		rend.Error(404)
+		return
+	}
+	type onlyName struct {
+		Name string `json:"name"`
+		ID   string `json:"id"`
+	}
+	var filtered onlyName
+	filtered.ID = auth.ID
+	filtered.Name = auth.Name
+
+	rend.JSON(200, filtered)
+
 }

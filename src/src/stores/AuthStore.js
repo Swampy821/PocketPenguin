@@ -9,7 +9,6 @@ class AuthStore {
     constructor() {
         let savedAuth = Cookie.load("auth");
 
-        
         this.auth = {};
         if( savedAuth ) {
             this.auth = savedAuth;

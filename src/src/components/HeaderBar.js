@@ -69,7 +69,7 @@ class HeaderBar extends Component {
 
 
     getTitle() {
-        return "Pocket Penguin";
+        return this.props.title || "Pocket Penguin";
     }
 
     responseFacebook(auth) {
