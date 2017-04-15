@@ -67,10 +67,10 @@ class RSVPButton extends Component {
     }
 
     onClick() {
+        AuthActions.updateRSVP(this.props.id, this.state.auth.JWT, !this.getRSVPStatus());
         this.setState({
             rsvp: !this.state.rsvp
         });
-        AuthActions.updateRSVP(this.props.id, this.state.auth.JWT, !this.getRSVPStatus());
     }
     render() {
         if(!this.getRSVPStatus()) {
