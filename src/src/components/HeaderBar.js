@@ -12,6 +12,7 @@ import PeopleIcon from 'material-ui/svg-icons/social/people';
 import FaceIcon from 'material-ui/svg-icons/action/face';
 import InputIcon from 'material-ui/svg-icons/action/input';
 import ReplyIcon from 'material-ui/svg-icons/content/reply';
+import CodeIcon from 'material-ui/svg-icons/action/code';
 import { browserHistory } from 'react-router';
 import alt from "../alt";
 import FacebookLogin from 'react-facebook-login';
@@ -141,6 +142,20 @@ class HeaderBar extends Component {
         }   
     }
 
+    getRegister() {
+        if(!this.state.ID) {
+            return <MenuItem 
+                primaryText="Register"
+                leftIcon={<InputIcon />}
+                onClick={this.showRegister.bind(this)}
+            />
+        }   
+    }
+
+    gotoGithub() {
+        window.location.href = "https://github.com/Swampy821/pocketpenguin";
+    }
+
     render() {
         return (
             <div>
@@ -172,6 +187,14 @@ class HeaderBar extends Component {
                     {this.getLogin()}
                     {this.getRegister()}
                     {this.getLogoutButton()}
+
+
+                    <MenuItem 
+                        style={{marginTop:"50px"}}
+                        primaryText="View Source"
+                        leftIcon={<CodeIcon />}
+                        onClick={this.gotoGithub.bind(this)}
+                    />
                 </Drawer>
             </MuiThemeProvider>
             </div>
