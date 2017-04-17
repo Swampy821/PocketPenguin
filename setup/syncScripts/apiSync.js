@@ -2,14 +2,15 @@
 
 const  MongoClient = require('mongodb').MongoClient
 const data = require('./export.json');
-const connUrl = 'mongodb://localhost:27017/PP';
+const connUrl = 'mongodb://localhost:8888/PP';
 const dateFormat = require('dateformat');
-const formatStyle = 'mm/dd/yyyy';
+const formatStyle = 'l';
+const moment = require('moment');
 
 function convertObj(obj) {
     return {
-        day: dateFormat(new Date(obj.start_date), formatStyle),
-        endday: dateFormat(new Date(obj.end_date), formatStyle),
+        day: moment(new Date(obj.start_date + " EST")).format("l"),
+        endday: moment(new Date(obj.end_date + " EST")).format("l"),
         time: obj.start_time,
         endtime: obj.end_time,
         title: obj.name,
@@ -52,7 +53,7 @@ let globalCollection
             promiseArray.push(new Promise((resolve, reject) => {
                 collection.updateOne(
                     { title : item.title }, 
-                    { $set: item }, (err, result) =>{
+                    { $set: convertObj(item) }, (err, result) =>{
                     if(err) {
                         reject(err);
                     } else {
@@ -73,7 +74,6 @@ let globalCollection
         });
         return Promise.all(insertArray.map((insert) => {
             return new Promise((resolve, reject) => {
-                console.log(convertObj(insert.item));
                 globalCollection.insertMany([convertObj(insert.item)], (err, result) => {
                         if(err) {
                             reject(err);
