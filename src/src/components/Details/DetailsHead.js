@@ -28,19 +28,19 @@ class DetailsHead extends Component {
     }
     getDay(dayNumber) {
         switch(dayNumber) {
-            case 6: 
+            case 0: 
                 return "Sunday";
-            case 0:
-                return "Monday";
             case 1:
+                return "Monday";
+            case 2:
                 return "Tuesday";
-            case 2: 
-                return "Wednesday";
             case 3: 
+                return "Wednesday";
+            case 4: 
                 return "Thusday";
-            case 4:
-                return "Friday";
             case 5:
+                return "Friday";
+            case 6:
                 return "Saturday";
         }
     }
