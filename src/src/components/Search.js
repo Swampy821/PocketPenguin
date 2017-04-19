@@ -6,6 +6,8 @@ import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import SearchIcon from "material-ui/svg-icons/action/search";
 import ScheduleActions from "./../actions/ScheduleActions";
+import debounce from "debounce";
+import Cookie from "react-cookie";
 
 const style = {
     textAlign: "center",
@@ -25,9 +27,28 @@ const textStyle = {
 class Search extends Component {
     constructor(props) {
         super(props);
+        
     }
+    componentWillMount() {
+        this.updateField();
+    }
+    componentDidMount() {
+        this.updateField();
+    }
+
+    updateField() {
+        const val = Cookie.load("search");
+        if (val) {
+            setTimeout(() => {
+                document.getElementById("searchId").value = val;
+                ScheduleActions.search(val);
+            });
+        }
+    }
+
     onChange(e, val) {
         ScheduleActions.search(val);
+        Cookie.save("search", val);
     }
     render() {
         return (
@@ -35,8 +56,8 @@ class Search extends Component {
                 <Paper style={style} zDepth={1} >
                     <SearchIcon style={searchStyle}/>
                     <TextField style={textStyle}
-                        hintText="Enter Program Name"
-                        onChange={this.onChange.bind(this)}
+                        id="searchId"
+                        onChange={debounce(this.onChange.bind(this), 200)}
                     />
                 </Paper>
             </MuiThemeProvider>
