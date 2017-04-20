@@ -8,7 +8,7 @@ class ScheduleActions {
         auth = auth || {}
         const d = new Date();
         const hour = d.getHours();
-        let savedData = localStorage.getItem(`scheduleByDay${hour}`);
+        let savedData = localStorage.getItem(`2scheduleByDay${hour}`);
         try{
             savedData = JSON.parse(savedData);
         }catch(e){}
@@ -21,7 +21,7 @@ class ScheduleActions {
             .then( (data) => {
                 if(data.text !== "") {
                     localStorage.clear();
-                    localStorage.setItem(`scheduleByDay${hour}`, data.text);
+                    localStorage.setItem(`2scheduleByDay${hour}`, data.text);
                 }
                 this.actions.scheduleUpdate(data.body);
             });
