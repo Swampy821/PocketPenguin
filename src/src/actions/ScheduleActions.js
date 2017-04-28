@@ -6,12 +6,13 @@ import api from "../api";
 class ScheduleActions {
     getScheduleByDay(auth) {
         auth = auth || {}
-        const d = new Date();
-        const hour = d.getHours();
-        let savedData = localStorage.getItem(`2scheduleByDay${hour}`);
-        try{
-            savedData = JSON.parse(savedData);
-        }catch(e){}
+        // const d = new Date();
+        // const hour = d.getHours();
+        // let savedData = localStorage.getItem(`2scheduleByDay${hour}`);
+        // try{
+        //     savedData = JSON.parse(savedData);
+        // }catch(e){}
+        let savedData = false;
         if(!savedData && savedData !== undefined) {
             api.get({
                 url: "/schedule/day",
@@ -19,10 +20,10 @@ class ScheduleActions {
                 data: {}
             })
             .then( (data) => {
-                if(data.text !== "") {
-                    localStorage.clear();
-                    localStorage.setItem(`2scheduleByDay${hour}`, data.text);
-                }
+                // if(data.text !== "") {
+                //     localStorage.clear();
+                //     localStorage.setItem(`2scheduleByDay${hour}`, data.text);
+                // }
                 this.actions.scheduleUpdate(data.body);
             });
         }else{
